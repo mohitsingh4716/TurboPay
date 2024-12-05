@@ -16,17 +16,17 @@ export const authOptions = {
             const hashedPassword = await bcrypt.hash(credentials.password, 10);
             const existingUser = await db.user.findFirst({
                 where: {
-                    number: credentials.phone
+                    phone: credentials.phone
                 }
             });
 
             if (existingUser) {
-                const passwordValidation = await bcrypt.compare(credentials.password, existingUser.password);
+                const passwordValidation = existingUser.password && await bcrypt.compare(credentials.password, existingUser.password);
                 if (passwordValidation) {
                     return {
-                        id: existingUser.id.toString(),
+                        id: existingUser.id,
                         name: existingUser.name,
-                        email: existingUser.number
+                        phone: existingUser.phone
                     }
                 }
                 return null;
@@ -35,15 +35,16 @@ export const authOptions = {
             try {
                 const user = await db.user.create({
                     data: {
-                        number: credentials.phone,
-                        password: hashedPassword
+                        phone: credentials.phone,
+                        password: hashedPassword,
+                        name: credentials.name || "Default Name"
                     }
                 });
             
                 return {
-                    id: user.id.toString(),
+                    id: user.id,
                     name: user.name,
-                    email: user.number
+                    phone: user.phone
                 }
             } catch(e) {
                 console.error(e);
@@ -56,11 +57,24 @@ export const authOptions = {
     secret: process.env.JWT_SECRET || "secret",
     callbacks: {
         // TODO: can u fix the type here? Using any is bad
+        async jwt({token, user}:any){
+            if(user){
+               token.sub = user.id;
+               token.phone = user.phone;
+               token.name = user.name;
+            
+            }
+            return token;
+        },
         async session({ token, session }: any) {
-            session.user.id = token.sub
-
+            session.user.id = token.sub;
+            session.user.phone = token.phone;
+            session.user.name = token.name;
             return session
         }
-    }
+    },
+    pages: {
+        signIn: '/signin',
+    },
   }
   
