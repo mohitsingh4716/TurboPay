@@ -4,6 +4,8 @@ import { Input } from "@repo/ui/input";
 import { SubHeading } from "@repo/ui/subheading";
 import { SignUpInputType } from "@repo/validation/inputValidation";
 import axios from "axios";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -14,26 +16,48 @@ export const SignUpform= ()=>{
         phone:'',
         password:'',
     })
-   async function handleSignUp() {
-        console.log({ signupdata });
+    const router=useRouter();
+    async function handleSignUp() {
+        
         if(signupdata.name.trim().length < 1 || signupdata.phone.trim().length < 1 || signupdata.password.trim().length < 1){
             toast.warning("Please fill all fields");
             return;
         }
+        const loadingToast= toast.loading("Creating account...");
         try{
-            const res= await axios.post("http://localhost:3000/signup", signupdata);
-            // toast.success("Account created successfully");
+            const res= await axios.post("http://localhost:3000/api/auth/signup", signupdata);
             if(res.data.error){
+                toast.dismiss(loadingToast);
                 toast.error(res.data.error);
                 return;
             }
             else{
-                toast.success("Account created successfully");
+                const res= await signIn("credentials", {
+                    phone: signupdata.phone,
+                    password: signupdata.password,
+                    redirect: false,
+                   
+                  })
+                  if(res?.error){
+                    toast.dismiss(loadingToast);
+                    toast.error(res.error);
+                    return;
+                  }
+                 
+                  setSignupdata({phone:'', password:'', name:''});
+                  toast.dismiss(loadingToast);
+                  toast.success("Account created successfully!");
+                  router.push("/");
             }
         }
-        catch(err){
-            console.log("Signup error ", err);
-            toast.error("An error occured, please try again");
+        catch(err:any){
+            toast.dismiss(loadingToast);
+            if (err.response.data.error) {
+              toast.warning(err.response.data.error);
+            } else {
+              console.error("An error occurred:", err);
+              toast.error("An error occurred. Please try again later");
+            }
         }
 
       };

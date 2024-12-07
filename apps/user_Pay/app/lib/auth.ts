@@ -1,56 +1,71 @@
 import db from "@repo/db/client";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt";
+import { signinInput } from "@repo/validation/inputValidation";
 
 export const authOptions = {
     providers: [
       CredentialsProvider({
           name: 'Credentials',
           credentials: {
-            phone: { label: "Phone number", type: "text", placeholder: "1231231231", required: true },
+            phone: { label: "Phone", type: "text", required: true },
             password: { label: "Password", type: "password", required: true }
           },
           // TODO: User credentials type from next-aut
           async authorize(credentials: any) {
             // Do zod validation, OTP validation here
-            const hashedPassword = await bcrypt.hash(credentials.password, 10);
+            if(!credentials.phone || !credentials.password){
+                throw new Error("Please fill all fields");
+            }
+
+            const { phone, password } = credentials;
+
+            const { success } = signinInput.safeParse({ phone, password });
+            if(!success){
+                throw new Error("Invalid input");
+            }
+
+         
+
             const existingUser = await db.user.findFirst({
                 where: {
-                    phone: credentials.phone
+                    phone:phone
                 }
             });
 
-            if (existingUser) {
-                const passwordValidation = existingUser.password && await bcrypt.compare(credentials.password, existingUser.password);
-                if (passwordValidation) {
-                    return {
-                        id: existingUser.id,
-                        name: existingUser.name,
-                        phone: existingUser.phone
-                    }
-                }
-                return null;
+            if(!existingUser){
+                throw new Error("User not found");
+            }
+            if(!existingUser.password){
+                throw new Error("password invalid");
             }
 
-            try {
-                const user = await db.user.create({
-                    data: {
-                        phone: credentials.phone,
-                        password: hashedPassword,
-                        name: credentials.name || "Default Name"
-                    }
-                });
+            const passwordValidation =  await bcrypt.compare(password, existingUser.password);
+
+            if(!passwordValidation){
+                throw new Error("Invalid password");
+            }
+
+            return {
+                id: existingUser.id,
+                name: existingUser.name,
+                phone: existingUser.phone
+            }
             
-                return {
-                    id: user.id,
-                    name: user.name,
-                    phone: user.phone
-                }
-            } catch(e) {
-                console.error(e);
-            }
+            
+            // try {
+            //     const user = await db.user.create({
+            //         data: {
+            //             phone: credentials.phone,
+            //             password: hashedPassword,
+            //             name: credentials.name || "Default Name"
+            //         }
+            //     });
+            
+            // } catch(e) {
+            //     console.error(e);
+            // }
 
-            return null
           },
         })
     ],

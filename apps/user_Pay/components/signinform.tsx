@@ -26,6 +26,8 @@ export const Signinform: React.FC = () => {
       return;
     }
 
+    const loadingToast= toast.loading("Signing in...");
+
     try{
       const res= await signIn("credentials", {
         phone: signindata.phone,
@@ -35,17 +37,24 @@ export const Signinform: React.FC = () => {
        
       })
       if(res?.error){
+        toast.dismiss(loadingToast);
         toast.error(res.error);
         return;
       }
       setSignindata({phone:'', password:''});
+      toast.dismiss(loadingToast);
       toast.success("Signin successful");
       router.push("/");
     }
-    catch (err) {
-      console.log("Signin error ", err);
-      toast.error("An error occurred during signin. Please try again")
-     }
+    catch(err:any){
+      toast.dismiss(loadingToast);
+      if (err.response.data.error) {
+        toast.warning(err.response.data.error);
+      } else {
+        console.error("An error occurred:", err);
+        toast.error("An error occurred. Please try again later");
+      }
+    }
     
   };
 
