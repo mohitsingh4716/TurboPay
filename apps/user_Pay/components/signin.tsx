@@ -1,13 +1,16 @@
 "use client";
-export const SigninComponent = () => {
+import React from 'react';
+import { Signinform } from "./signinform";
+import { ImageSection } from '@repo/ui/image';
+
+export const SignInPage: React.FC = () => {
   return (
-    <div>
-      <h1 className="text-3xl text-white">Signin</h1>
-      <form>
-        <input type="text" placeholder="Phone number" />
-        <input type="password" placeholder="Password" />
-        <button>Signin</button>
-      </form>
+    <div className="flex min-h-screen">
+      <div className="flex flex-col justify-center flex-1 px-8 lg:px-20">
+        <Signinform/>
+      </div>
+      <ImageSection/>
     </div>
   );
 };
+

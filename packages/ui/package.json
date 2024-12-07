@@ -3,9 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./subheading":"./src/authComp/subheading.tsx",
+    "./heading": "./src/authComp/heading.tsx",
+    "./authbutton": "./src/authComp/button.tsx",
+    "./image":"./src/authComp/image.tsx",
+    "./input": "./src/authComp/input.tsx",
+    "./checkbox": "./src/authComp/checkBox.tsx",
+    "./center":"./src/center.tsx",
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",
+    "./textinput":"./src/TextInput.tsx",
     "./Appbar":"./src/Appbar.tsx"
   },
   "scripts": {

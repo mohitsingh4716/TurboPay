@@ -1,8 +1,9 @@
 {
   "extends": "@repo/typescript-config/react-library.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "./dist",
+    "rootDir": "./src",
   },
-  "include": ["src", "../../apps/user_Pay/components/signinform.tsx"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }

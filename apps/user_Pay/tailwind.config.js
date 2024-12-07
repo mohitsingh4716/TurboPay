@@ -8,7 +8,14 @@ module.exports = {
     "../../packages/ui/src/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        purple: {
+          600: '#6C63FF', // Adjust for a payment app theme
+          700: '#5548C8',
+        },
+      },
+    },
   },
   plugins: [],
 }
