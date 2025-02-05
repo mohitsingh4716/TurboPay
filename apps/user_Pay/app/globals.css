@@ -78,3 +78,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities{
+  
+  .gradient {
+    @apply bg-gradient-to-br from-blue-600 to-purple-700;
+  }
+
+  .gradient-title{
+    @apply gradient font-extrabold tracking-tighter pr-2 text-transparent bg-clip-text;
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientMove 3s ease infinite;
+}
