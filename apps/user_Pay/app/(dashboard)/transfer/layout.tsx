@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import TransferPage from "./page";
 import { BarLoader } from 'react-spinners'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout() {
     return (
         <div className='px-5'>
         <h1 className=' text-5xl gradient-title'>Transfer</h1>
