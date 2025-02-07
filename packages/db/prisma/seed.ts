@@ -10,7 +10,7 @@ async function main() {
         phone: '1111111111',
       password: await bcrypt.hash('alice', 10),
       name: 'alice',
-      Balance: {
+      balance: {
         create: {
             amount: 20000,
             locked: 0
@@ -34,7 +34,7 @@ async function main() {
         phone: '2222222222',
       password: await bcrypt.hash('bob', 10),
       name: 'bob',
-      Balance: {
+      balance: {
         create: {
             amount: 2000,
             locked: 0

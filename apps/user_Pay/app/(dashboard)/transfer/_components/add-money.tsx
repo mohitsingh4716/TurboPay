@@ -31,8 +31,7 @@ const AddMoney = () => {
   const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name || "");
 
   return (
-    <div>
-      <Card>
+      <Card className="p-6  shadow-md">
         <CardHeader>
           <CardTitle>Add Money</CardTitle>
         </CardHeader>
@@ -85,7 +84,6 @@ const AddMoney = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
   );
 };
 

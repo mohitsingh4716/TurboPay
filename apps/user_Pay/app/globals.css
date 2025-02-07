@@ -82,7 +82,7 @@
 @layer utilities{
   
   .gradient {
-    @apply bg-gradient-to-br from-blue-600 to-purple-700;
+    @apply bg-gradient-to-br from-blue-500 to-purple-700;
   }
 
   .gradient-title{

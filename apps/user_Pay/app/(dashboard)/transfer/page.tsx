@@ -27,6 +27,7 @@ async function getOnRampTransactions() {
         }
     });
     return txns.map(t => ({
+        key: t.id,
         time: t.createdAt,
         amount: t.amount,   
         status: OnRampStatus[t.status as keyof typeof OnRampStatus],
@@ -47,7 +48,7 @@ export default async function TransferPage() {
                 <AddMoney />
             </div>
             <div>
-                <BalanceCard amount={balance?.amount || 0} locked={balance.locked} />
+                <BalanceCard amount={balance?.amount} locked={balance.locked} />
                 <div className="pt-4">
                     <OnRampTransactions transactions={transactions} />
                 </div>
