@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "../provider";
 import { Toaster } from "sonner";
-import { AppbarClient } from "../components/AppbarClient";
+import { AppbarClient, Header } from "../components/AppbarClient";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,6 +30,7 @@ export default function RootLayout({
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className="min-w-screen min-h-screen bg-[#ebe6e6]">
             <AppbarClient />
+            {/* <Header /> */}
             {children}
           </div>
           <Toaster

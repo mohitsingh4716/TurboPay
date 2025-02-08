@@ -1,13 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import { SidebarItem } from "./SidebarItems";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarHeader,
   SidebarMenu,
 } from "@/components/ui/sidebar";
+import { Card } from "./ui/card";
+import Link from "next/link";
 
 
 const menuItems = [
@@ -36,10 +40,20 @@ const menuItems = [
 export function AppSidebar() {
   return (
     <Sidebar className="h-screen">
+         <SidebarHeader>
+            <Card className="flex flex-col justify-center p-2">
+              <Link href="/dashboard">
+                   <Image  src="/images/logo.png"
+                     alt="TurboPay Logo"
+                     width={200} height={60}
+                     priority/>
+               </Link>
+              </Card>
+         </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="mt-20">
+            <SidebarMenu className="mt-16">
               {menuItems.map((item) => (
                 <SidebarItem
                   key={item.title}

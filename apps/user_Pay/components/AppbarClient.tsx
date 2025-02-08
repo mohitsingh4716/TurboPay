@@ -4,6 +4,8 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import { toast } from 'sonner';
+import { Card } from './ui/card';
+import Image from 'next/image';
 
 
 
@@ -11,7 +13,7 @@ export const AppbarClient = () => {
     const session= useSession();
     const router= useRouter();
   return (
-    <div >
+    <div className='fixed w-full bg-slate-50' >
         <Appbar onSignin={signIn} onSignout={
             async ()=>{
                 await signOut({redirect: false});
@@ -20,5 +22,21 @@ export const AppbarClient = () => {
             }
         } user={session.data?.user} />
     </div>
+
+  )
+}
+
+export const Header= async ()=>{
+  return (
+   <div>
+      <Card>
+        <div>
+        <Image  src="/images/logo.png"
+          alt="TurboPay Logo"
+          width={200} height={60}
+          priority/>
+        </div>
+      </Card>
+   </div>
   )
 }

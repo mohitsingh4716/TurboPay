@@ -8,6 +8,7 @@ import { SignInInputType } from "@repo/validation/inputValidation";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Card } from "./ui/card";
 
 
 export const Signinform: React.FC = () => {
@@ -59,7 +60,8 @@ export const Signinform: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <Card className="w-full max-w-md p-10 mx-auto">
+    <div className="w-full max-w-md">
       <Heading label="Sign in your account" />
       <p className="text-gray-500 mb-6">
         Log in to continue with your payments
@@ -100,5 +102,6 @@ export const Signinform: React.FC = () => {
         onclicktext="Sign up"
       />
     </div>
+    </Card>
   );
 };
