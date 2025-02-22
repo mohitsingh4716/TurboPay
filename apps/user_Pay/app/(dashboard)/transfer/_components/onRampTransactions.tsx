@@ -1,5 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CheckCircle, Clock, XCircle } from 'lucide-react';
 
 type onRampProps= {
     transactions: {
@@ -34,8 +35,23 @@ export const OnRampTransactions = ({transactions}:onRampProps) => {
               <CardTitle>Recent Transactions</CardTitle>
           </CardHeader>
           <CardContent>
-              <div className="pt-2">
-                {transactions.map(t => <div className="flex justify-between">
+              <div className="pt-1">
+              <div className="flex justify-between border-b pb-1 font-medium">
+                        <div className="">
+                            Details
+                        </div>
+                 
+                     <div>Status</div>
+                    <div className="flex flex-col justify-cente">
+                        Amount
+                    </div>
+
+                </div>
+                {transactions.map(t => {
+                  const statusConfig = getStatusConfig(t.status);
+                  return (
+                <div className="flex justify-between border-b p-1 hover:bg-gray-50 transition-colors">
+                   
                     <div>
                         <div className="text-sm">
                             Received INR
@@ -43,13 +59,17 @@ export const OnRampTransactions = ({transactions}:onRampProps) => {
                         <div className="text-slate-600 text-xs">
                             {t.time.toDateString()}
                         </div>
-                        {/* <div>{t.status}</div> */}
+                       
                     </div>
-                    <div className="flex flex-col justify-center">
-                        + Rs {t.amount / 100}
+                     <div className={`flex gap-1 items-center m-1.5 px-3 py-1 ${getStatusConfig(t.status).bgColor} ${getStatusConfig(t.status).textColor} text-sm rounded-md`}> <statusConfig.icon size={16} />{t.status}</div>
+                     <div className={`text-base font-medium ${t.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        + ₹ {t.amount / 100}
                     </div>
 
-                </div>)}
+                </div>
+                )
+                }
+            )}
             </div>
 
           </CardContent>
@@ -59,8 +79,31 @@ export const OnRampTransactions = ({transactions}:onRampProps) => {
     )
 }
 
-export enum OnRampStatus {
+const getStatusConfig = (status: OnRampStatus) => {
+    const configs = {
+      Success: {
+        bgColor: 'bg-green-100',
+        textColor: 'text-green-700',
+        icon: CheckCircle
+      },
+      Processing: {
+        bgColor: 'bg-yellow-100',
+        textColor: 'text-yellow-700',
+        icon: Clock
+      },
+      Failure: {
+        bgColor: 'bg-red-100',
+        textColor: 'text-red-700',
+        icon: XCircle
+      }
+    };
+    return configs[status];
+  };
+
+  export enum OnRampStatus {
     Success="Success",
     Failure="Failure",
     Processing="Processing"
   }
+ 
+    
