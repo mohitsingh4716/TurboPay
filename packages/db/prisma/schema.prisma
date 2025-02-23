@@ -34,6 +34,7 @@ model p2pTransfer {
   fromUser User @relation(name: "FromUserRealtion", fields: [fromUserId], references: [id])
   toUser User @relation(name: "ToUserRealtion", fields: [toUserId], references: [id])
   createdAt DateTime @default(now())
+  direction String?
 }
 
 
