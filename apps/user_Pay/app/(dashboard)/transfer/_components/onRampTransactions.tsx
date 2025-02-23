@@ -4,6 +4,7 @@ import { CheckCircle, Clock, XCircle } from 'lucide-react';
 
 type onRampProps= {
     transactions: {
+        id: string,
         time: Date,
         amount: number,
         status: OnRampStatus,
@@ -42,7 +43,7 @@ export const OnRampTransactions = ({transactions}:onRampProps) => {
                         </div>
                  
                      <div>Status</div>
-                    <div className="flex flex-col justify-cente">
+                    <div>
                         Amount
                     </div>
 
@@ -50,7 +51,7 @@ export const OnRampTransactions = ({transactions}:onRampProps) => {
                 {transactions.map(t => {
                   const statusConfig = getStatusConfig(t.status);
                   return (
-                <div className="flex justify-between border-b p-1 hover:bg-gray-50 transition-colors">
+                <div key={t.id} className="flex justify-between border-b p-1 hover:bg-gray-50 transition-colors">
                    
                     <div>
                         <div className="text-sm">

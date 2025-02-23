@@ -45,6 +45,7 @@ export async function p2pTransfer(to: string, amount: number) {
             data: { amount: { increment: amount } },
           });
 
+          // Sender
           await tx.p2pTransfer.create({
             data: {
               fromUserId: from,
@@ -52,10 +53,24 @@ export async function p2pTransfer(to: string, amount: number) {
               status: "Success",
               amount,
               createdAt: new Date(),
+              direction:"send"
             },
           });
+
+          // Receiver 
+          await tx.p2pTransfer.create({
+            data: {
+              fromUserId: toUser.id,
+              toUserId: from,
+              status: "Success",
+              amount,
+              createdAt: new Date(),
+              direction:"receive"
+
+            }
+          })
         });
-        return true;
+        return {message:" Transaction Successful"};
       } catch(e){
         await prisma.$disconnect()
         return false;

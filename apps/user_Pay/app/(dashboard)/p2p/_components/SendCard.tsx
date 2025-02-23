@@ -34,7 +34,7 @@ const SendCard = () => {
       );
 
       toast.dismiss(loadingToast);
-      if (sts === true) {
+      if (sts !== false) {
         toast.success("Sent successfully");
         setSendcard({ number: "", amount: "" });
       } else {
