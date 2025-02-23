@@ -69,11 +69,10 @@ const AddMoney = () => {
               </SelectContent>
             </Select>
             {/* {JSON.stringify({ amount, provider, redirectUrl })} */}
-
+           <div className="pt-6">
             <Button
               type="button"
-              variant="outline"
-              className="bg-gray-700 hover:bg-gray-800 text-white"
+              className="gradient text-white w-full"
               onClick={async () => {
                 await createOnRampTransaction(amount*100, provider);
                 window.location.href = redirectUrl || "";
@@ -81,6 +80,7 @@ const AddMoney = () => {
             >
               Add Money
             </Button>
+            </div>
           </div>
         </CardContent>
       </Card>

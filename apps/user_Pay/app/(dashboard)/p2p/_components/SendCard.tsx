@@ -77,7 +77,7 @@ const SendCard = () => {
             }}
           />
           <div className="pt-4 flex justify-center">
-            <Button onClick={handleSubmit}>Send</Button>
+            <Button className="w-full gradient" onClick={handleSubmit}>Send</Button>
           </div>
         </div>
       </CardContent>
