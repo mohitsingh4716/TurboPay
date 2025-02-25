@@ -16,7 +16,7 @@ export const OnRampTransactions = ({transactions}:onRampProps) => {
 
 
     if (!transactions.length) {
-        return  <Card>
+        return  <Card className="w-full h-auto flex flex-col">
         <CardHeader>
             <CardTitle>Recent Transactions</CardTitle>
         </CardHeader>
@@ -31,14 +31,14 @@ export const OnRampTransactions = ({transactions}:onRampProps) => {
     }
 
     return (
-      <Card>
+      <Card  className="w-full h-auto md:h-[650px] flex flex-col">
           <CardHeader>
               <CardTitle>Recent Transactions</CardTitle>
           </CardHeader>
-          <CardContent>
-              <div className="pt-1">
-              <div className="flex justify-between border-b pb-1 font-medium">
-                        <div className="">
+          <CardContent className="flex-1 overflow-y-auto">
+              <div className="pt-1 bg-white z-10 border-b font-medium ">
+              <div className="flex sticky top-0 justify-between bg-white">
+                        <div>
                             Details
                         </div>
                  
@@ -48,29 +48,32 @@ export const OnRampTransactions = ({transactions}:onRampProps) => {
                     </div>
 
                 </div>
+                <div>
                 {transactions.map(t => {
                   const statusConfig = getStatusConfig(t.status);
                   return (
-                <div key={t.id} className="flex justify-between border-b p-1 hover:bg-gray-50 transition-colors">
-                   
-                    <div>
-                        <div className="text-sm">
-                            Received INR
+                    <div key={t.id} className="flex justify-between border-b p-1 hover:bg-gray-50 transition-colors">
+                      
+                        <div>
+                            <div className="text-sm">
+                                Received INR
+                            </div>
+                            <div className="text-slate-600 text-xs">
+                                {t.time.toDateString()}
+                            </div>
+                          
                         </div>
-                        <div className="text-slate-600 text-xs">
-                            {t.time.toDateString()}
+                        <div className={`flex gap-1 items-center m-1.5 px-3 py-1 ${getStatusConfig(t.status).bgColor} ${getStatusConfig(t.status).textColor} text-sm rounded-md`}> <statusConfig.icon size={16} />{t.status}</div>
+                        <div className={`text-base font-medium ${t.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                            + ₹ {t.amount / 100}
                         </div>
-                       
-                    </div>
-                     <div className={`flex gap-1 items-center m-1.5 px-3 py-1 ${getStatusConfig(t.status).bgColor} ${getStatusConfig(t.status).textColor} text-sm rounded-md`}> <statusConfig.icon size={16} />{t.status}</div>
-                     <div className={`text-base font-medium ${t.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        + ₹ {t.amount / 100}
-                    </div>
 
-                </div>
-                )
-                }
+                    </div>
+                 ) }
+            
+               
             )}
+               </div>
             </div>
 
           </CardContent>

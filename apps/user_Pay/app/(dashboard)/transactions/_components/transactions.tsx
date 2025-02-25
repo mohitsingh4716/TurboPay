@@ -49,15 +49,15 @@ const P2PTransaction = ({transactions}: p2pTxnsProps) => {
   return (
     <div>
     
-        <Card>
+        <Card className='w-full h-auto md:h-[650px] flex flex-col'>
             <CardHeader>
                 <CardTitle>P2P Transactions </CardTitle>
             </CardHeader>
-            <CardContent className='divide-y divide-gray-200'>
-               
-                <div className="pt-1">
-                    <div className="flex justify-between border-b pb-1 font-medium items-center">
-                        <div className="flex">
+            <CardContent className="flex-1 overflow-y-auto">
+              <div className="pt-1 bg-white z-10 border-b font-medium ">
+              <div className="flex sticky top-0 justify-between bg-white">
+
+                        <div>
                             Details
                         </div>
                         <div>
