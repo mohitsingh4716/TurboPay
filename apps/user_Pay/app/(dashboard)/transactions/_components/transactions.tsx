@@ -34,7 +34,7 @@ const P2PTransaction = ({transactions}: p2pTxnsProps) => {
     if (!transactions.length) {
         return  <Card>
         <CardHeader>
-            <CardTitle>Recent Transactions</CardTitle>
+            <CardTitle>P2P Transactions</CardTitle>
         </CardHeader>
         <CardContent>
         <div className="text-center pb-8 pt-8">
