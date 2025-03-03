@@ -51,7 +51,45 @@ async function main() {
       },
     },
   })
-  console.log({ alice, bob })
+  // console.log({ alice, bob })
+
+  const TestUser= await prisma.user.upsert({
+    where: { phone: '1234567890' },
+    update: {},
+    create: {
+        phone: '1234567890',
+      password: await bcrypt.hash('Test@123', 10),
+      name: 'Test User',
+      balance: {
+        create: {
+            amount: 10000000,
+            locked: 0
+        }
+      },
+      OnRampTransaction: {
+        create: {
+          createdAt: new Date(),
+          status: "Success",
+          amount: 2000,
+          token: "1234567890",
+          provider: "HDFC Bank",
+        },
+      },
+    },
+  })
+  // console.log({ TestUser })
+
+  const TurboBank= await prisma.bank.upsert({
+    where: { accountNumber: '7091010902' },
+    update: {},
+    create: {
+        name: 'TurboBank',
+        accountNumber: '7091010902',
+        balance: 1000000000,
+        userId: "Turbo_Bank",
+        password: await bcrypt.hash('Turbo@111', 10),
+    },
+  })
 }
 main()
   .then(async () => {
