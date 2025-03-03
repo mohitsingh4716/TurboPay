@@ -6,7 +6,7 @@ export const getBalanceHistory = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
-    return [];
+    throw new Error("User not authenticated.");
   }
 
   const userId = session.user.id;
