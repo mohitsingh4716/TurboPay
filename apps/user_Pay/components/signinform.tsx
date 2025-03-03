@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Input } from "@repo/ui/input";
-import { CheckBoxComp } from "@repo/ui/checkbox";
-import { Button } from "@repo/ui/authbutton";
 import { Heading } from "@repo/ui/heading";
-import { SubHeading } from "@repo/ui/subheading";
 import { SignInInputType } from "@repo/validation/inputValidation";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Card } from "./ui/card";
+import { Button } from "./ui/button";
 
 
 export const Signinform: React.FC = () => {
@@ -84,23 +82,23 @@ export const Signinform: React.FC = () => {
       />
 
       <div className="flex items-center text-sm justify-between my-2">
-        <CheckBoxComp
-          checked={rememberMe}
-          onChange={(e) => setRememberMe(e.target.checked)}
-          label="Remember Me"
-        />
-        <div className="text-sm cursor-pointer hover:text-gray-800 text-purple-500 hover:underline">
+
+        <div className="text-sm cursor-pointer hover:text-gray-800 gradient-title hover:underline">
           Forgot Password?
         </div>
       </div>
 
-      <Button onClick={handleSignIn} label="Sign in" />
+      <div className="pt-4 flex justify-center ">
+                 <Button className="w-full gradient " onClick={handleSignIn}>Sign in</Button>
+       </div>
 
-      <SubHeading
-        label="Don't have an account?"
-        to="/signup"
-        onclicktext="Sign up"
-      />
+       <div className="pt-4 flex justify-center">
+         <p>Don't have an account? </p>
+         <span>
+            <a href="/signup" className="gradient-title hover:underline">Sign up</a>
+         </span>
+       </div>
+     
     </div>
     </Card>
   );

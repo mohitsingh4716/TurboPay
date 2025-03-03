@@ -129,7 +129,7 @@ export const BalanceChart: React.FC<AccountChartProps> = ({ balance }) => {
               <Bar
                 dataKey="amount"
                 name="Amount"
-                fill="#0375e1"
+                fill="#4A7CE0"
                 radius={[4, 4, 0, 0]}
               />
             </BarChart>

@@ -1,7 +1,6 @@
-import { Button } from "@repo/ui/authbutton";
+
 import { Heading } from "@repo/ui/heading";
 import { Input } from "@repo/ui/input";
-import { SubHeading } from "@repo/ui/subheading";
 import { SignUpInputType } from "@repo/validation/inputValidation";
 import axios from "axios";
 import { signIn } from "next-auth/react";
@@ -10,6 +9,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Card } from "./ui/card";
 import { createBalance } from "@/app/lib/action/createBalance";
+import { Button } from "./ui/button";
 
 export const SignUpform = () => {
   const [signupdata, setSignupdata] = useState<SignUpInputType>({
@@ -100,12 +100,18 @@ export const SignUpform = () => {
             setSignupdata({ ...signupdata, password: e.target.value })
           }
         />
-        <Button onClick={handleSignUp} label="Create Account" />
-        <SubHeading
-          label="Already have an account?"
-          to="/signin"
-          onclicktext="Sign in"
-        />
+       
+       <div className="pt-4 flex justify-center ">
+                 <Button className="w-full gradient " onClick={handleSignUp}> Create Account</Button>
+       </div>
+
+        
+         <div className="pt-4 flex justify-center">
+         <p>Already have an account? </p>
+         <span>
+            <a href="/signin" className="gradient-title hover:to-black"> Sign in</a>
+         </span>
+       </div>
       </div>
     </Card>
   );

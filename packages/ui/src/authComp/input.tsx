@@ -23,7 +23,7 @@ export const Input= ({label, type, placeholder, value, onChange }:InputFieldProp
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="w-full py-3 px-3 mt-2 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+        className="w-full py-3 px-3 mt-2 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
       />
      </div>
   );

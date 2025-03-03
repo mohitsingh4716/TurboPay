@@ -31,9 +31,9 @@ const AddMoney = () => {
   const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name || "");
 
   return (
-      <Card className="p-6  shadow-md">
+      <Card className="p-4  shadow-md">
         <CardHeader>
-          <CardTitle>Add Money</CardTitle>
+          <CardTitle className="text-2xl font-semibold">Add Money</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="w-full space-y-2">

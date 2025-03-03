@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { format } from 'date-fns';
 import { CheckCircle, XCircle } from 'lucide-react';
 import React from 'react'
 
@@ -34,7 +35,7 @@ const P2PTransaction = ({transactions}: p2pTxnsProps) => {
     if (!transactions.length) {
         return  <Card>
         <CardHeader>
-            <CardTitle>P2P Transactions</CardTitle>
+            <CardTitle className='text-2xl font-semibold border-b'>P2P Transactions</CardTitle>
         </CardHeader>
         <CardContent>
         <div className="text-center pb-8 pt-8">
@@ -51,7 +52,7 @@ const P2PTransaction = ({transactions}: p2pTxnsProps) => {
     
         <Card className='w-full h-auto md:h-[650px] flex flex-col'>
             <CardHeader>
-                <CardTitle>P2P Transactions </CardTitle>
+                <CardTitle className='text-2xl font-semibold'>P2P Transactions </CardTitle>
             </CardHeader>
             <CardContent className="flex-1 overflow-y-auto">
               <div className="pt-1 bg-white z-10 border-b font-medium ">
@@ -79,7 +80,14 @@ const P2PTransaction = ({transactions}: p2pTxnsProps) => {
                                         {t.direction === "send" ? "Sent INR" : "Received INR"}
                                     </div>
                                     <div className="text-slate-600 text-xs">
-                                        {formatDate(t.createdAt.toDateString())}
+                                        {/* {formatDate(t.createdAt.toDateString())} */}
+                                        <span className='hidden md:block'>
+                                            {format(t.createdAt.toString(), "dd MMM yyyy, hh:mm a")}
+                                        </span>
+                                        <span className='md:hidden'>
+                                            {format(t.createdAt.toString(), "dd MMM yyyy")}
+                                        </span>
+                                        
                                     </div>
                                 </div>
 
@@ -97,7 +105,7 @@ const P2PTransaction = ({transactions}: p2pTxnsProps) => {
                             )}
                         </div>
 
-                        <div className={`flex items-center gap-1 m-0.5 lg:m-1.5 px-3 py-1 text-sm rounded-full ${t.status === "Success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+                        <div className={`flex items-center gap-1 m-0.5 lg:m-1.5 px-3 py-1 text-sm rounded-2xl ${t.status === "Success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
                             {t.status === "Success" ? (
                                 <CheckCircle size={16} />
                             ) : (
