@@ -2,8 +2,10 @@ import express from "express";
 import db from "@repo/db/client";
 const app = express();
 import {z} from "zod";
+import cors from "cors";
 
 app.use(express.json())
+app.use(cors())
 
  const webhookSchema= z.object({
     token:z.string(),
@@ -23,7 +25,7 @@ app.post("/hdfcWebhook", async (req, res) => {
 
     const {token, user_identifier, amount}= req.body;
 
-    const actualAmount= amount*100;
+    // const actualAmount= amount*100;
 
     const onRampTxn= await db.onRampTransaction.findFirst({
         where:{
@@ -49,7 +51,7 @@ app.post("/hdfcWebhook", async (req, res) => {
     } = {
         token:token,
         userId:user_identifier,
-        amount:actualAmount
+        amount:amount
     };
 
     try {
