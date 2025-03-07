@@ -1,6 +1,7 @@
 "use server"
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
+import { randomBytes } from 'crypto';
 import prisma from "@repo/db/client";
 
 
@@ -8,7 +9,7 @@ export async function createOnRampTransaction(amount: number, provider: string){
     const session= await getServerSession(authOptions);
     const userId= session?.user?.id;
 
-    const token= (Math.random()*1000).toString();
+   const token = randomBytes(32).toString('hex');
 
     if(!userId){
         return {
@@ -24,12 +25,11 @@ export async function createOnRampTransaction(amount: number, provider: string){
             createdAt:new Date(),
             provider,
             token:token,
-
-
         }
     })
 
     return{
+        token,
         message: "On Ramp transection added successfully" 
     }
 }

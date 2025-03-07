@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { createOnRampTransaction } from "@/app/lib/action/createOnRampTransaction";
+import { toast } from "sonner";
 
 const SUPPORTED_BANKS = [
   {
@@ -19,7 +20,7 @@ const SUPPORTED_BANKS = [
   },
   {
     name: "Axis Bank",
-    redirectUrl: "https://www.axisbank.com/",
+    redirectUrl: "http://localhost:3001/",
   },
 ];
 
@@ -29,6 +30,35 @@ const AddMoney = () => {
   );
   const [amount, setAmount] = useState(0);
   const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name || "");
+
+  const handleSubmit= async () => {
+    if (amount <= 0) {
+      toast.error("Please enter a valid amount")
+      return
+  }
+  if (provider === "Choose Bank") {
+      toast.error("Please select a bank")
+      return
+  }
+  try {
+      const {token} = await createOnRampTransaction(amount*100, provider);
+      const safeRedirectUrl = redirectUrl || "http://localhost:3000/dashboard";
+
+
+    if (typeof token !== 'string') {
+      throw new Error("Invalid token received")
+  }
+
+  const redirectWithToken = `${safeRedirectUrl}?token=${encodeURIComponent(token)}`
+
+  window.location.href = redirectWithToken
+
+  } catch (err) {
+    console.error(err)
+    toast.error("An error occurred while adding money")
+ }
+  
+  }
 
   return (
       <Card className="p-4  shadow-md">
@@ -73,10 +103,7 @@ const AddMoney = () => {
             <Button
               type="button"
               className="gradient text-white w-full"
-              onClick={async () => {
-                await createOnRampTransaction(amount*100, provider);
-                window.location.href = redirectUrl || "";
-              }}
+              onClick={handleSubmit}
             >
               Add Money
             </Button>
