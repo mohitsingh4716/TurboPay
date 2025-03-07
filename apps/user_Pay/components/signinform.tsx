@@ -19,7 +19,7 @@ export const Signinform: React.FC = () => {
   const router=useRouter();
 
  async function handleSignIn() {
-    console.log({ signindata, rememberMe });
+    // console.log({ signindata, rememberMe });
     if(signindata.phone.trim().length < 1 || signindata.password.trim().length < 1){
       toast.warning("Please fill all fields");
       return;

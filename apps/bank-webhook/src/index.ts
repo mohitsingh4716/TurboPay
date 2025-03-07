@@ -32,7 +32,7 @@ app.post("/hdfcWebhook", async (req, res) => {
             token
         }
     })
-    console.log(onRampTxn);
+    // console.log(onRampTxn);
 
      //Complete: check if this onRampTxn is proceesing or not
     if(onRampTxn?.status !== "Processing"){

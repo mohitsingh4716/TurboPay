@@ -16,7 +16,7 @@ import { toast } from "sonner";
 const SUPPORTED_BANKS = [
   {
     name: "HDFC Bank",
-    redirectUrl: "https://netbanking.hdfcbank.com",
+    redirectUrl: "http://localhost:3001/",
   },
   {
     name: "Axis Bank",

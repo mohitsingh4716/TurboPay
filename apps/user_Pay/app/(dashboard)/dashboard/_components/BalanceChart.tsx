@@ -43,7 +43,7 @@ const DATE_RANGES: Record<string, { label: string; days: number | null }> = {
 
 export const BalanceChart: React.FC<AccountChartProps> = ({ balance }) => {
   const [dateRange, setDateRange] = useState<string>("1M");
-  console.log(balance);
+  // console.log(balance);
 
   const filterData = useMemo(() => {
     const range = DATE_RANGES[dateRange];
