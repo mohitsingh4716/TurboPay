@@ -1,3 +1,5 @@
+"use server"
+
 import prisma from "@repo/db/client"
 import bcrypt from "bcrypt";
 export const checkCredentials = async (username: string, password: string, amount:number) => {

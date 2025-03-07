@@ -37,7 +37,7 @@ export const MainPage: FC = () => {
     // console.log( data.password, data.userName);
     const loadingToast= toast.loading("Adding money to your account...");
 
-    const user= await addMoney(token);
+    const user = await addMoney(token);
 
 
     if(user.transaction){
@@ -45,7 +45,7 @@ export const MainPage: FC = () => {
      const checkCredential = await checkCredentials(data.userName, data.password, user.transaction.amount);
 
      if(checkCredential.message==="Success"){
-       await axios.post("/api/transaction", {
+       await axios.post("http://localhost:3003/hdfcWebhook", {
         token: token,
         user_identifier: user.transaction.userId,
         amount: user.transaction.amount

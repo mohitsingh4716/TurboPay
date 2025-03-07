@@ -15,10 +15,13 @@ export const addMoney= async (token: string) => {
         }
     })
 
-    if(!transaction){
-        return "Invalid Token provided"
+     if(!transaction){
+        return {
+            message:"Invalid token"
+        }
     }
 
-
-    return transaction
+    return{
+        transaction
+    }
 }
