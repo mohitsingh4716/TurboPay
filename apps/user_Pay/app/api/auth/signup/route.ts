@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import db from "@repo/db/client";
 import bcrypt from "bcrypt";
-import { signupInput } from "@repo/validation/inputValidation";
+import { signupInput } from "@repo/validation/input";
 
 export async function POST(req: NextRequest) {
 

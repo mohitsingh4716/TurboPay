@@ -1,7 +1,7 @@
 
 import { Heading } from "@repo/ui/heading";
 import { Input } from "@repo/ui/input";
-import { SignUpInputType } from "@repo/validation/inputValidation";
+import { SignUpInputType } from "@repo/validation/input";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";

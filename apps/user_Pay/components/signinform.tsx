@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "@repo/ui/input";
 import { Heading } from "@repo/ui/heading";
-import { SignInInputType } from "@repo/validation/inputValidation";
+import { SignInInputType } from "@repo/validation/input";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
