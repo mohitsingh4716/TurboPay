@@ -69,7 +69,7 @@ const AddMoney = () => {
           <div className="w-full space-y-2">
             <label className="text-sm font-medium">Amount</label>
             <Input
-              type="text"
+              type="number"
               placeholder="Amount"
               onChange={(e) => {
                 setAmount(Number(e.target.value));

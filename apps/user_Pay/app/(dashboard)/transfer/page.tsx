@@ -1,12 +1,19 @@
 
+import { getServerSession } from "next-auth";
 import AddMoney from "./_components/add-money";
 import BalanceCard from "./_components/balance-card";
 import {OnRampTransactions } from "./_components/onRampTransactions";
 import getBalance from "@/app/utils/getBalance";
 import getOnRampTransactions from "@/app/utils/getOnRampTransactions";
+import { authOptions } from "@/app/lib/auth";
+import { redirect } from "next/navigation";
 
 
 export default async function TransferPage() {
+     const session= await getServerSession(authOptions);
+            if(!session){
+                redirect("/landing");
+            }
 
     const balance = await getBalance();
     const transactions = await getOnRampTransactions();

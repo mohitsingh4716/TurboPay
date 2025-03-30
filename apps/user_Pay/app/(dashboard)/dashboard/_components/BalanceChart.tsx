@@ -110,7 +110,7 @@ export const BalanceChart: React.FC<AccountChartProps> = ({ balance }) => {
                 tickFormatter={(value) => `₹${value}`}
               />
               <Tooltip
-               content={({active, payload }) => {
+               content={({payload }) => {
                 if (!payload || payload.length === 0 || !payload[0]?.payload.date) {
                   return null;
                 }

@@ -26,6 +26,12 @@ const SendCard = () => {
       toast.warning("Please fill all fields");
       return;
     }
+    if (
+      Number(sendcard.amount) <= 0
+    ) {
+      toast.warning("Please fill valid amount");
+      return;
+    }
     const loadingToast = toast.loading("Sending...");
     try {
       const sts = await p2pTransfer(
@@ -60,7 +66,7 @@ const SendCard = () => {
         <div className="pt-4 space-y-4">
           <label className="text-sm font-medium block">Number</label>
           <Input
-            type="text"
+            type="number"
             placeholder="Number"
             value={sendcard.number}
             onChange={(e) => {
@@ -69,7 +75,7 @@ const SendCard = () => {
           />
           <label className=" block text-sm font-medium">Amount</label>
           <Input
-            type="text"
+            type="number"
             placeholder="Amount"
             value={sendcard.amount}
             onChange={(e) => {

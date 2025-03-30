@@ -3,6 +3,7 @@ import prisma from "@repo/db/client";
 import { getServerSession } from "next-auth"
 import P2PTransaction from "./_components/transactions";
 import { OnRampTransactions, OnRampStatus } from "../transfer/_components/onRampTransactions";
+import { redirect } from "next/navigation";
 
 
 async function p2pTransactions() {
@@ -79,6 +80,12 @@ async function getRampTransaction() {
 }
 
 export default async function Transactions() {
+    
+     const session= await getServerSession(authOptions);
+        if(!session){
+            redirect("/landing");
+        }
+
     const p2pTxns= await p2pTransactions();
 
     const rampTxns= await getRampTransaction();

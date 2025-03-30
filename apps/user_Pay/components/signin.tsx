@@ -1,7 +1,6 @@
 "use client";
 import React from 'react';
 import { Signinform } from "./signinform";
-import { Card } from './ui/card';
 
 
 export const SignInPage: React.FC = () => {

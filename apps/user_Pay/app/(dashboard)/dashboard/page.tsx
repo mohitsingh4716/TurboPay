@@ -6,8 +6,15 @@ import { BalanceChart } from "./_components/BalanceChart";
 import { getProfile } from "@/app/utils/getProfile";
 import { BalanceAndProfileCard } from "./_components/BalanceAndProfileCard";
 import getBalance from "@/app/utils/getBalance";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function() {
+    const session= await getServerSession(authOptions);
+        if(!session){
+            redirect("/landing");
+        }
 
     const getHistoryBalance = await getBalanceHistory();
     const getProfileData = await getProfile();

@@ -1,6 +1,13 @@
+import { authOptions } from "@/app/lib/auth";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import SendCard from "./_components/SendCard";
 
-export default function() {
+export default async function() {
+     const session= await getServerSession(authOptions);
+        if(!session){
+            redirect("/landing");
+        }
     return (
         <div className="min-h-scree px-5">
          <h1 className='text-5xl gradient-title'>P2P Transfer</h1>

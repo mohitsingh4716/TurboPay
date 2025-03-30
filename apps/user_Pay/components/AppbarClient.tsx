@@ -13,11 +13,12 @@ export const AppbarClient = () => {
     const session= useSession();
     const router= useRouter();
   return (
-    <div className='fixed w-full bg-slate-50' >
+    <div className='fixed w-full bg-slate-50 z-50' >
         <Appbar onSignin={signIn} onSignout={
             async ()=>{
                 await signOut({redirect: false});
-                router.push("/api/auth/signin")
+                // router.push("/api/auth/signin")
+                router.push('/landing')
                 toast.success("Logged out successfully");
             }
         } user={session.data?.user} />

@@ -18,16 +18,16 @@ interface p2pTxnsProps {
 
 }
 
-  function formatDate(dateString: string): string {
-    return new Intl.DateTimeFormat('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true
-    }).format(new Date(dateString));
-  }
+//   function formatDate(dateString: string): string {
+//     return new Intl.DateTimeFormat('en-US', {
+//       month: 'short',
+//       day: 'numeric',
+//       year: 'numeric',
+//       hour: 'numeric',
+//       minute: 'numeric',
+//       hour12: true
+//     }).format(new Date(dateString));
+//   }
 
 
 const P2PTransaction = ({transactions}: p2pTxnsProps) => {
