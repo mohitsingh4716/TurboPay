@@ -1,7 +1,7 @@
 
 import { Heading } from "@repo/ui/heading";
 import { Input } from "@repo/ui/input";
-import { SignUpInputType } from "@repo/validation/input";
+import { SignupInputTypes } from "@repo/validation/input";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ import { createBalance } from "@/app/lib/action/createBalance";
 import { Button } from "./ui/button";
 
 export const SignUpform = () => {
-  const [signupdata, setSignupdata] = useState<SignUpInputType>({
+  const [signupdata, setSignupdata] = useState<SignupInputTypes>({
     name: "",
     phone: "",
     password: "",
