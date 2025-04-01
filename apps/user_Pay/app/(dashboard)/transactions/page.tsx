@@ -41,7 +41,7 @@ async function p2pTransactions() {
 
 
 
-    return p2pTxns.map(t=>{
+    return p2pTxns.map((t:any) =>{
         return {
             key:t.id,
             id:t.id,
@@ -69,7 +69,7 @@ async function getRampTransaction() {
             createdAt: "desc"
         },
     });
-    return txns.map(t => ({
+    return txns.map((t:any) => ({
         key: t.id,
         id: t.id,
         time: t.createdAt,

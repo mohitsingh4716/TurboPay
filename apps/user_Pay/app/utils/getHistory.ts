@@ -29,12 +29,12 @@ export const getBalanceHistory = async () => {
 
   // Merge and sort transactions chronologically
   const allTransactions = [
-    ...onRampTransactions.map((t) => ({
+    ...onRampTransactions.map((t:any) => ({
       date: t.createdAt.toISOString(),
       amount: t.amount / 100,
       type: "onramp",
     })),
-    ...p2pTransactions.map((t) => ({
+    ...p2pTransactions.map((t:any) => ({
       date: t.createdAt.toISOString(),
       amount: t.direction === "send" ? -t.amount / 100 : t.amount / 100,
       type: "p2p",

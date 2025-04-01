@@ -15,7 +15,7 @@ export default async function getOnRampTransactions() {
         },
         take: 5
     });
-    return txns.map(t => ({
+    return txns.map((t:any) => ({
         key: t.id,
         id: t.id,
         time: t.createdAt,
