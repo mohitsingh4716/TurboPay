@@ -42,7 +42,7 @@ const AddMoney = () => {
   }
   try {
       const {token} = await createOnRampTransaction(amount*100, provider);
-      const safeRedirectUrl = redirectUrl || "http://localhost:3000/dashboard";
+      const safeRedirectUrl = redirectUrl || "https://turbo-pay-two.vercel.app/dashboard";
 
 
     if (typeof token !== 'string') {
