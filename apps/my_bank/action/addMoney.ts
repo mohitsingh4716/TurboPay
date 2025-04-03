@@ -1,6 +1,8 @@
 "use server"
 
-import prisma from "@repo/db/client";
+// import prisma from "@repo/db/client"
+import prisma from "../../../packages/db/index"
+
 
 export const addMoney= async (token: string) => {
     
