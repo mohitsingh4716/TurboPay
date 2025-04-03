@@ -21,6 +21,8 @@ export const MainPage: FC = () => {
     password: "",
   });
 
+  const mainurl = process.env.API_URL || "";
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData({
@@ -45,7 +47,7 @@ export const MainPage: FC = () => {
      const checkCredential = await checkCredentials(data.userName, data.password, user.transaction.amount);
 
      if(checkCredential.message==="Success"){
-       await axios.post("http://localhost:3003/hdfcWebhook", {
+       await axios.post(`${mainurl}/hdfcWebhook`, {
         token: token,
         user_identifier: user.transaction.userId,
         amount: user.transaction.amount
@@ -54,7 +56,7 @@ export const MainPage: FC = () => {
        toast.dismiss(loadingToast);
        toast.success("Money added successfully!");
 
-       window.location.href = "  http://localhost:3000/dashboard";
+       window.location.href = "https://turbo-pay-two.vercel.app/dashboard";
       }
       else {
         toast.warning(checkCredential.message);
