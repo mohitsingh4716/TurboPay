@@ -16,11 +16,11 @@ import { toast } from "sonner";
 const SUPPORTED_BANKS = [
   {
     name: "HDFC Bank",
-    redirectUrl: "http://localhost:3001/",
+    redirectUrl: "https://turbo-bank.vercel.app/",
   },
   {
     name: "Axis Bank",
-    redirectUrl: "http://localhost:3001/",
+    redirectUrl: "https://turbo-bank.vercel.app/",
   },
 ];
 
