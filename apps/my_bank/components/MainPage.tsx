@@ -57,7 +57,7 @@ export const MainPage: FC = () => {
        toast.dismiss(loadingToast);
        toast.success("Money added successfully!");
 
-       window.location.href = "https://turbo-pay-two.vercel.app/dashboard";
+       window.location.href = "https://turbopay.vercel.app/dashboard";
       }
       else {
         toast.warning(checkCredential.message);
