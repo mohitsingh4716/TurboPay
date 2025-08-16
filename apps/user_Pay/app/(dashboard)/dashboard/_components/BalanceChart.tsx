@@ -15,8 +15,8 @@ import {
 import { endOfDay, format, startOfDay, subDays } from "date-fns";
 import React, { useMemo, useState } from "react";
 import {
-  Bar,
-  BarChart,
+  Line,
+  LineChart,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
@@ -43,7 +43,6 @@ const DATE_RANGES: Record<string, { label: string; days: number | null }> = {
 
 export const BalanceChart: React.FC<AccountChartProps> = ({ balance }) => {
   const [dateRange, setDateRange] = useState<string>("1M");
-  // console.log(balance);
 
   const filterData = useMemo(() => {
     const range = DATE_RANGES[dateRange];
@@ -58,15 +57,15 @@ export const BalanceChart: React.FC<AccountChartProps> = ({ balance }) => {
         (t) => new Date(t.date) >= startDate && new Date(t.date) <= endOfDay(now)
       )
       .map((t) => ({
-        date:new Date(t.date),
+        date: new Date(t.date),
         displayDate: format(new Date(t.date), "MMM dd"),
         amount: t.amount,
-      }));
+      }))
+      .sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
 
-
-    return Object.values(filtered).sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
+    return filtered;
   }, [balance, dateRange]);
 
   return (
@@ -92,11 +91,11 @@ export const BalanceChart: React.FC<AccountChartProps> = ({ balance }) => {
       <CardContent>
         <div className="h-[350px]">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart
+            <LineChart
               data={filterData}
               margin={{ top: 10, right: 10, left: 10, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="displayDate"
                 fontSize={12}
@@ -110,33 +109,34 @@ export const BalanceChart: React.FC<AccountChartProps> = ({ balance }) => {
                 tickFormatter={(value) => `₹${value}`}
               />
               <Tooltip
-               content={({payload }) => {
-                if (!payload || payload.length === 0 || !payload[0]?.payload.date) {
-                  return null;
-                }
-            
-                const date = new Date(payload[0]?.payload.date);
-                const formattedDate = format(date, "dd MMM h:mma, yyyy");
-            
-                return (
-                  <div className="bg-white border border-gray-300 p-2 rounded-md shadow-md">
-                    <p className="text-black font-medium">{formattedDate}</p>
-                    <p className="gradient-title font-semibold">Balance: ₹{payload[0].value}</p>
-                  </div>
-                );
-              }}
+                content={({ payload, label }) => {
+                  if (!payload || payload.length === 0 || !payload[0]?.payload.date) {
+                    return null;
+                  }
+              
+                  const date = new Date(payload[0]?.payload.date);
+                  const formattedDate = format(date, "dd MMM h:mma, yyyy");
+              
+                  return (
+                    <div className="bg-white border border-gray-300 p-2 rounded-md shadow-md">
+                      <p className="text-black font-medium">{formattedDate}</p>
+                      <p className="gradient-title font-semibold">Balance: ₹{payload[0].value}</p>
+                    </div>
+                  );
+                }}
               />
-              <Bar
+              <Line
+                type="monotone"
                 dataKey="amount"
-                name="Amount"
-                fill="#4A7CE0"
-                radius={[4, 4, 0, 0]}
+                stroke="#4A7CE0"
+                strokeWidth={3}
+                dot={{ fill: "#4A7CE0", strokeWidth: 2, r: 4 }}
+                activeDot={{ r: 6, stroke: "#4A7CE0", strokeWidth: 2 }}
               />
-            </BarChart>
+            </LineChart>
           </ResponsiveContainer>
         </div>
       </CardContent>
     </Card>
   );
 };
-

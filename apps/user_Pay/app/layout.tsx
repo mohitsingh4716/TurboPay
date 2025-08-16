@@ -28,7 +28,8 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="min-w-screen min-h-screen bg-[#ebe6e6]">
+        {/* <div className="min-w-screen min-h-screen bg-[#ebe6e6]"> */}
+      <div className="min-w-screen min-h-screen bg-[linear-gradient(135deg,rgba(180,200,255,0.15)_0%,rgba(180,200,255,0.20)_50%,rgba(180,170,230,0.25)_100%)]">
             <AppbarClient />
             {/* <Header /> */}
             {children}

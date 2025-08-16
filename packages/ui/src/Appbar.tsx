@@ -17,10 +17,10 @@ export const Appbar = ({ user, onSignin, onSignout }: AppbarProps) => {
       <nav className="text-lg flex flex-col justify-center">
         <Link href="/">
           <Image
-            src="/images/logo.png"
+            src="/images/TURBOPAY.svg"
             alt="TurboPay Logo"
-            width={200}
-            height={60}
+            width={240}
+            height={40}
             priority
           />
         </Link>

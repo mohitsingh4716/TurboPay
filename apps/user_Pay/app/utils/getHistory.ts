@@ -41,6 +41,8 @@ export const getBalanceHistory = async () => {
     })),
   ].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
+  // console.log(allTransactions);
+
   let ongoingBalance = 0;
   const balanceHistory: { date: string; amount: number }[] = [];
 
@@ -52,7 +54,7 @@ export const getBalanceHistory = async () => {
     });
   });
 
-//   console.log(balanceHistory);
+  // console.log(balanceHistory);
 
   return balanceHistory.length > 0
     ? balanceHistory
